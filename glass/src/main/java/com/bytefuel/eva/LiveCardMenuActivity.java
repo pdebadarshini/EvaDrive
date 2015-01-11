@@ -67,6 +67,12 @@ public class LiveCardMenuActivity extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.action_dismiss_alert:
+                LiveCardService.dismissAlert();
+                return true;
+            case R.id.action_show_alerts:
+                LiveCardService.showAlert();
+                return true;
             case R.id.action_stop:
                 // Stop the service which will unpublish the live card.
                 stopService(new Intent(this, LiveCardService.class));

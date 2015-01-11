@@ -5,10 +5,11 @@
 
     <string name="title_activity_live_card_service">Eva LiveCard</string>
     <string name="action_show_alerts">Show alerts</string>
-    <string name="action_stop">Stop</string>
+    <string name="action_stop">Stop driving</string>
     <string name="hello_world">Hello world!</string>
     <string name="eva_voice_trigger">lets drive</string>
     <string name="eva_voice_prompt">here are the alerts</string>
-    <string name="alerts_text">Alerts</string>
+    <string name="alerts_text">1 Alert !</string>
+    <string name="action_dismiss_alert">Dismiss</string>
 
 </resources>
