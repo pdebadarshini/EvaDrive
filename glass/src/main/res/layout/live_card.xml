@@ -1,0 +1,29 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:padding="@dimen/no_margin"
+    tools:context=".LiveCardService">
+
+    <!--
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="@string/hello_world" />
+-->
+    <ImageView
+        android:src="@drawable/road_side_glass"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        />
+    <TextView
+        android:id="@+id/eva_textbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#A0000000"
+        android:textColor="#ffffffff"
+        android:padding="10dip"
+        android:textSize="40sp"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="right|bottom"
+        android:text="@string/alerts_text"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+</RelativeLayout>
