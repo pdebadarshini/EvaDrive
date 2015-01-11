@@ -87,6 +87,12 @@ public class LiveCardMenuActivity extends Activity {
         if (isMyMenu(featureId)) {
             // Handle item selection.
             switch (item.getItemId()) {
+                case R.id.action_dismiss_alert:
+                    LiveCardService.dismissAlert();
+                    return true;
+                case R.id.action_show_alerts:
+                    LiveCardService.showAlert();
+                    return true;
                 case R.id.action_stop:
                     stopService(new Intent(this, LiveCardService.class));
                     return true;

@@ -2,6 +2,12 @@ package com.bytefuel.eva;
 
 import java.util.Locale;
 
+import android.app.Notification;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Handler;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -20,6 +26,18 @@ import android.widget.TextView;
 
 
 public class MainActivity extends ActionBarActivity implements ActionBar.TabListener {
+
+    private static final int DELAY_MILLIS = 6500;
+    private static final int NOTIF_ID = 1001;
+    private static final String[] ALERTS = {"Fog Alert !", "Accident ahead !", "Road closure !"};
+    private static final String[] ALERT_FOOTNOTE = {"Fog 50 feet ahead.",
+            "Accident at the next intersection", "Road closed 200 feet ahead."};
+    private static final int[] ALERT_IMAGE = {R.drawable.foggy_alert,
+            R.drawable.accident, R.drawable.road_blocked};
+    private int mAlertIndex = 0, mPreviousAlert = 0;
+    private Handler mHandler = new Handler();
+    private Notification mNotification;
+    private Bitmap[] mBitmapArray;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -52,6 +70,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+        createBitmapArray();
 
         // When swiping between different sections, select the corresponding
         // tab. We can also use ActionBar.Tab#select() to do this if we have
@@ -76,6 +95,45 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         }
     }
 
+    private void createBitmapArray() {
+        mBitmapArray = new Bitmap[ALERT_FOOTNOTE.length];
+        for (int i = 0; i < ALERT_IMAGE.length; i++) {
+            mBitmapArray[i] = BitmapFactory.decodeResource(getResources(), ALERT_IMAGE[i]);
+        }
+    }
+    private FreshAlertRunnable mFreshAlertRunnable = new FreshAlertRunnable();
+    private class FreshAlertRunnable implements Runnable {
+
+        public void run() {
+            int alertIndex = getAlertNumber();
+            // Create a WearableExtender to add functionality for wearables
+            NotificationCompat.WearableExtender wearableExtender =
+                    new NotificationCompat.WearableExtender()
+                            .setHintHideIcon(true)
+                            .setBackground(mBitmapArray[alertIndex]);
+
+            mNotification = new NotificationCompat.Builder(MainActivity.this)
+                    .setContentTitle(ALERTS[alertIndex])
+                    .setContentText(ALERT_FOOTNOTE[alertIndex])
+                    .setSmallIcon(R.drawable.eve)
+                    .setLargeIcon(mBitmapArray[alertIndex])
+                    .extend(wearableExtender)
+                    .build();
+            // Get an instance of the NotificationManager service
+            NotificationManagerCompat notificationManager =
+                    NotificationManagerCompat.from(MainActivity.this);
+
+           // Issue the notification with notification manager.
+           notificationManager.notify(NOTIF_ID, mNotification);
+           mHandler.postDelayed(mFreshAlertRunnable, DELAY_MILLIS);
+        }
+    }
+
+    private int getAlertNumber() {
+        mPreviousAlert = mAlertIndex;
+        mAlertIndex = (mAlertIndex + 1) % ALERT_FOOTNOTE.length;
+        return mPreviousAlert;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -25,8 +25,8 @@ public class LiveCardService extends Service {
     private static final String[] ALERTS = {"Fog Alert !", "Accident ahead !", "Road closure !"};
     private static final String[] ALERT_FOOTNOTE = {"Fog 50 feet ahead.",
     "Accident at the next intersection", "Road closed 200 feet ahead."};
-    private static final int[] ALERT_IMAGE = {R.drawable.road_side_glass,
-    R.drawable.road_side_glass, R.drawable.road_side_glass};
+    private static final int[] ALERT_IMAGE = {R.drawable.foggy,
+    R.drawable.accident, R.drawable.road_blocked};
     private int mAlertIndex = 0, mPreviousAlert = 0;
 
     private LiveCard mLiveCard;
@@ -93,11 +93,13 @@ public class LiveCardService extends Service {
         mStaticInstance.dismissAlertImpl();
     }
 
+    private FreshAlertRunnable mFreshAlertRunnable = new FreshAlertRunnable();
+
     public void dismissAlertImpl() {
         RemoteViews views = new RemoteViews(getPackageName(), R.layout.live_card);
         views.setTextViewText(R.id.eva_textbox, "No Alerts");
         mLiveCard.setViews(views);
-        mHandler.postDelayed(mSecondScreenRunnable, 2 * DELAY_MILLIS);
+        mHandler.postDelayed(mFreshAlertRunnable, 2 * DELAY_MILLIS);
     }
 
     public int getPreviousAlert() {
@@ -115,4 +117,15 @@ public class LiveCardService extends Service {
                 .getRemoteViews();
         mLiveCard.setViews(mLiveCardView);
     }
+
+    private class FreshAlertRunnable implements Runnable {
+
+        public void run() {
+            RemoteViews views = new RemoteViews(getPackageName(), R.layout.live_card);
+            views.setTextViewText(R.id.eva_textbox, "1 Alert !");
+            mLiveCard.setViews(views);
+        }
+    }
+
+
 }
