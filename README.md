@@ -10,7 +10,7 @@ SCREEN SHOTS OF GOOGLE GLASS IMPLEMENTATIONS:
 
 HOME SCREEN:
 
-<img src="https://chaibytesdotcom.files.wordpress.com/2015/08/4a296-home2bscreen2b2.png?w=960&h=600/>
+<img src="https://chaibytesdotcom.files.wordpress.com/2015/08/4a296-home2bscreen2b2.png?w=960&h=600"/>
 
 ALERT SCREEN:
 
