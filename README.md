@@ -18,7 +18,7 @@ ALERT SCREEN:
 
 FOGGY ALERT SCREEN:
 
-<img src="https://chaibytesdotcom.files.wordpress.com/2015/08/6b679-foggy2balert.png?w=960&h=600/>
+<img src="https://chaibytesdotcom.files.wordpress.com/2015/08/6b679-foggy2balert.png?w=960&h=600"/>
 
 FOGGY ADVICE SCREEN:
 
@@ -26,6 +26,6 @@ FOGGY ADVICE SCREEN:
 
 ACCIDENT WARNING SCREEN:
 
-<img src="https://chaibytesdotcom.files.wordpress.com/2015/08/2cffc-accident2bahead.png?w=960&h=600/>
+<img src="https://chaibytesdotcom.files.wordpress.com/2015/08/2cffc-accident2bahead.png?w=960&h=600"/>
 
 
